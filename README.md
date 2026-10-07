@@ -26,7 +26,6 @@ not part of the paper are not included.
 | `metrics.py` | spatial maps of TCC, RMSE, variance and per-sample ACC |
 | `interpretability.py` | permutation feature importance (PFI) |
 | `pfi_analysis.py` | runs the PFI analysis for the four lead weeks |
-| `b_sweep.py` | sensitivity experiment for the loss weight `b` (Fig. S1) |
 
 ## Data
 
@@ -45,26 +44,18 @@ CACHE_DIR = '...'           # cached pre-processed samples
 
 ## Usage
 
-Install the dependencies:
+Set the data and output paths in `config.py` first. The four lead-week models
+are trained with `train_unet_model` in `train.py` (one model per lead week) and
+verified with `evaluate.py` and `metrics.py`.
 
-```bash
-pip install -r requirements.txt
-```
-
-Train and evaluate the four lead-week models, and run the `b` sensitivity
-experiment:
-
-```bash
-python b_sweep.py
-```
-
-Run the permutation feature importance analysis for the four trained models:
+The permutation feature importance analysis for the four trained models is run
+with
 
 ```bash
 python pfi_analysis.py
 ```
 
-The verification scores can be printed with the helper in `utils.py`:
+and the verification scores can be printed with the helper in `utils.py`:
 
 ```python
 from utils import print_score_summary
